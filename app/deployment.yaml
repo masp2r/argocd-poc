@@ -23,7 +23,7 @@ spec:
       containers:
       - name: app-docker
         imagePullPolicy: Always
-        image: docker.io/masp2r/argocd-poc:latest
+        image: quay.io/jacob_mastroianni/app-docker:latest
         livenessProbe:
           failureThreshold: 3
           httpGet:
