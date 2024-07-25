@@ -3,27 +3,27 @@ kind: Deployment
 metadata:
   annotations:
   labels:
-    app: spring-petclinic
+    app: app-docker
     app.kubernetes.io/component: web
-    app.kubernetes.io/instance: spring-petclinic
-    app.kubernetes.io/name: spring-petclinic
-    app.kubernetes.io/part-of: spring-petclinic
+    app.kubernetes.io/instance: app-docker
+    app.kubernetes.io/name: app-docker
+    app.kubernetes.io/part-of: app-docker
     app.openshift.io/runtime: java
-  name: spring-petclinic
+  name: app-docker
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-petclinic
+      app: app-docker
   template:
     metadata:
       labels:
-        app: spring-petclinic
+        app: app-docker
     spec:
       containers:
-      - name: spring-petclinic
+      - name: app-docker
         imagePullPolicy: Always
-        image: quay.io/siamaksade/spring-petclinic:latest
+        image: docker.io/masp2r/argocd-poc:latest
         livenessProbe:
           failureThreshold: 3
           httpGet:
