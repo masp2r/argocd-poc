@@ -1,49 +1,53 @@
-name: Docker Build
-
-on:
-  push:
-    tags:
-      - 'v*.*.*'
-
-permissions: 
-  contents: read
-  packages: write
-
-jobs:
-  build-docker-image:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to GHCR
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: docker.io/masp2r/argocd-poc:latest
-          tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
-            type=ref,event=tag
-
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: app-docker
+    app.kubernetes.io/component: web
+    app.kubernetes.io/instance: app-docker
+    app.kubernetes.io/name: app-docker
+    app.kubernetes.io/part-of: app-docker
+    app.openshift.io/runtime: java
+  name: app-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-docker
+  template:
+    metadata:
+      labels:
+        app: app-docker
+    spec:
+      containers:
+      - name: app-docker
+        imagePullPolicy: Always
+        image: docker.io/masp2r/argocd-poc:latest
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 45
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
