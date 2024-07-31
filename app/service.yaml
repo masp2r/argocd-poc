@@ -1,78 +1,24 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: app-docker
-  namespace: app-docker
   labels:
     app: app-docker
-    app.kubernetes.io/instance: app-docker
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"app-docker","app.kubernetes.io/instance":"app-docker"},"name":"app-docker","namespace":"app-docker"},"spec":{"ports":[{"name":"8080-tcp","port":8080,"protocol":"TCP","targetPort":8080},{"name":"8443-tcp","port":8443,"protocol":"TCP","targetPort":8443},{"name":"8778-tcp","port":8778,"protocol":"TCP","targetPort":8778}],"selector":{"app":"app-docker"},"sessionAffinity":"None","type":"ClusterIP"}}
-  managedFields:
-    - manager: argocd-controller
-      operation: Update
-      apiVersion: v1
-      time: '2024-07-26T13:25:01Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            .: {}
-            'f:kubectl.kubernetes.io/last-applied-configuration': {}
-          'f:labels':
-            .: {}
-            'f:app': {}
-            'f:app.kubernetes.io/instance': {}
-        'f:spec':
-          'f:internalTrafficPolicy': {}
-          'f:ports':
-            .: {}
-            'k:{"port":8080,"protocol":"TCP"}':
-              .: {}
-              'f:name': {}
-              'f:port': {}
-              'f:protocol': {}
-              'f:targetPort': {}
-            'k:{"port":8443,"protocol":"TCP"}':
-              .: {}
-              'f:name': {}
-              'f:port': {}
-              'f:protocol': {}
-              'f:targetPort': {}
-            'k:{"port":8778,"protocol":"TCP"}':
-              .: {}
-              'f:name': {}
-              'f:port': {}
-              'f:protocol': {}
-              'f:targetPort': {}
-          'f:selector': {}
-          'f:sessionAffinity': {}
-          'f:type': {}
+  name: app-docker
 spec:
-  clusterIP: 172.30.36.52
-  ipFamilies:
-    - IPv4
   ports:
-    - name: 8080-tcp
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
-    - name: 8443-tcp
-      protocol: TCP
-      port: 8443
-      targetPort: 8443
-    - name: 8778-tcp
-      protocol: TCP
-      port: 8778
-      targetPort: 8778
-  internalTrafficPolicy: Cluster
-  clusterIPs:
-    - 172.30.36.52
-  type: ClusterIP
-  ipFamilyPolicy: SingleStack
-  sessionAffinity: None
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: 8443-tcp
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  - name: 8778-tcp
+    port: 8778
+    protocol: TCP
+    targetPort: 8778
   selector:
     app: app-docker
-status:
-  loadBalancer: {}
+  sessionAffinity: None
+  type: ClusterIP
