@@ -3,9 +3,6 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: app-docker
   namespace: app-docker
-  uid: 2123ce14-2400-4c56-b8d9-790e18c080af
-  resourceVersion: '55496396'
-  creationTimestamp: '2024-07-26T13:25:01Z'
   labels:
     app: app-docker
     app.kubernetes.io/instance: app-docker
