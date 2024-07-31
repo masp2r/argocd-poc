@@ -1,64 +1,13 @@
-kind: Route
 apiVersion: route.openshift.io/v1
+kind: Route
 metadata:
-  name: app-docker
-  namespace: app-docker
   labels:
     app: app-docker
-    app.kubernetes.io/instance: app-docker
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"route.openshift.io/v1","kind":"Route","metadata":{"annotations":{},"labels":{"app":"app-docker","app.kubernetes.io/instance":"app-docker"},"name":"app-docker","namespace":"app-docker"},"spec":{"port":{"targetPort":"8080-tcp"},"to":{"kind":"Service","name":"app-docker","weight":100}}}
-    openshift.io/host.generated: 'true'
-  managedFields:
-    - manager: argocd-controller
-      operation: Update
-      apiVersion: route.openshift.io/v1
-      time: '2024-07-26T13:25:01Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:metadata':
-          'f:annotations':
-            .: {}
-            'f:kubectl.kubernetes.io/last-applied-configuration': {}
-          'f:labels':
-            .: {}
-            'f:app': {}
-            'f:app.kubernetes.io/instance': {}
-        'f:spec':
-          'f:port':
-            .: {}
-            'f:targetPort': {}
-          'f:to':
-            'f:kind': {}
-            'f:name': {}
-            'f:weight': {}
-          'f:wildcardPolicy': {}
-    - manager: openshift-router
-      operation: Update
-      apiVersion: route.openshift.io/v1
-      time: '2024-07-26T13:25:01Z'
-      fieldsType: FieldsV1
-      fieldsV1:
-        'f:status':
-          'f:ingress': {}
-      subresource: status
+  name: app-docker
 spec:
-  host: app-docker-app-docker.apps.opclab.chmccorp.cchmc.org
+  port:
+    targetPort: 8080-tcp
   to:
     kind: Service
     name: app-docker
     weight: 100
-  port:
-    targetPort: 8080-tcp
-  wildcardPolicy: None
-status:
-  ingress:
-    - host: app-docker-app-docker.apps.opclab.chmccorp.cchmc.org
-      routerName: default
-      conditions:
-        - type: Admitted
-          status: 'True'
-          lastTransitionTime: '2024-07-26T13:25:01Z'
-      wildcardPolicy: None
-      routerCanonicalHostname: router-default.apps.opclab.chmccorp.cchmc.org
