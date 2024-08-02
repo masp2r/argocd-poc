@@ -21,7 +21,7 @@ spec:
         app: app-docker
     spec:
       containers:
-        - image: 'quay.io/jacob_mastroianni/app-docker:latest'
+        - image: 'quay.io/jacob_mastroianni/app-docker:2.0'
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
