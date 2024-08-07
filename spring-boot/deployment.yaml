@@ -23,7 +23,7 @@ spec:
       containers:
       - name: spring-boot
         imagePullPolicy: Always
-        image: quay.io/repository/jacob_mastroianni/spring-boot:latest
+        image: quay.io/jacob_mastroianni/spring-boot:latest
         livenessProbe:
           failureThreshold: 3
           httpGet:
