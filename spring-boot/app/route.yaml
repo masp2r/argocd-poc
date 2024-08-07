@@ -2,12 +2,12 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app: app-docker
-  name: app-docker
+    app: spring-boot
+  name: spring-boot
 spec:
   port:
     targetPort: 8080-tcp
   to:
     kind: Service
-    name: app-docker
+    name: spring-boot
     weight: 100
