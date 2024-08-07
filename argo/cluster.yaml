@@ -11,6 +11,6 @@ spec:
   source:
     directory:
       recurse: true
-    path: cluster
-    repoURL: https://github.com/siamaksade/openshift-gitops-getting-started
-    targetRevision: HEAD
+    path: spring-boot/cluster
+    repoURL: https://github.com/masp2r/argocd-poc.git
+    targetRevision: spring-boot

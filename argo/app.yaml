@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-spring-petclinic
+  name: app-spring-boot
   namespace: openshift-gitops
 spec:
   destination:
-    namespace: spring-petclinic
+    namespace: spring-boot
     server: https://kubernetes.default.svc
   project: default
   source:
     directory:
       recurse: true
-    path: app
-    repoURL: https://github.com/siamaksade/openshift-gitops-getting-started.git
-    targetRevision: main
+    path: spring-boot/app
+    repoURL: https://github.com/masp2r/argocd-poc.git
+    targetRevision: spring-boot
   syncPolicy:
     automated:
       prune: true
