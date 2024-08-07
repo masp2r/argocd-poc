@@ -1,4 +1,0 @@
-resources:
-- /app-docker/app/deployment.yaml
-- /app-docker/app/service.yaml
-- /app-docker/app/route.yaml
