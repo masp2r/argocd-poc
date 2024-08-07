@@ -23,7 +23,7 @@ spec:
       containers:
       - name: spring-boot
         imagePullPolicy: Always
-        image: docker.io/masp2r/argocd-poc:latest
+        image: quay.io/repository/jacob_mastroianni/spring-boot:latest
         livenessProbe:
           failureThreshold: 3
           httpGet:
